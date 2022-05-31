@@ -22,5 +22,5 @@ To revoke a credential the issuer should calculate the keccak hash of the JWT (h
 * deploy the contracts, issue and revoke credentials with `npx hardhat run scripts/deploy.js`
     * Deploy the `EthereumDIDRegistry` for did management
     * Deploy the `RevocationRegistry` for revocation of verifiable credentials
-    * Issuer 3 credentials
-    * revoke 3 credentials
+    * Issuer 3 credentials from 3 different issuers
+    * revoke 3 credentials by the issuers
