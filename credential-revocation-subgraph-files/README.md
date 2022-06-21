@@ -17,7 +17,7 @@ Now we are ready create our sample subgraph using the follwoing steps:
 
 * Create a new folder and open it with VSC.
 * Open a new terminal and install the `graph cli` with `npm install -g @graphprotocol/graph-cli`
-* Initilize a sample subgraph for the verification smart contract `graph init --product hosted-service <Github-Name>/credential-revocation-graph` and give 
+* Initilize a sample subgraph for the revocation smart contract `graph init --product hosted-service <Github-Name>/credential-revocation-graph` and give 
     * Protocol · ethereum
     * Subgraph name · <Github-Name>/credential-revocation-graph
     * Directory to create the subgraph in · credential-revocation-graph
@@ -33,29 +33,26 @@ Now we are ready create our sample subgraph using the follwoing steps:
         abi: RevocationRegistry
         startBlock: <the-block-number>
   ```
-* Replace the code in `schema.graphql`. For better readabilty we replaced `issuer` with `issuerAddress` and `digset` with `credentialHash`. We also added the blockNumber and timestamp as extra properties which could be useful for some verification DApps.
+* Replace the code in `schema.graphql`. For better readability we replaced `issuer` with `issuerAddress` and `digset` with `credentialHash`. We also added the blockNumber and timestamp as extra properties which could be useful for some verification DApps.
 
   ```graphql
   type RevokedCredential @entity {
     id: ID!
-    count: BigInt!
     issuerAddress: Bytes! # address
     credentialHash: Bytes! # bytes32
     blockNumber: BigInt!
     timestamp: BigInt!
   }
   ```
-* Run `yarn codegen` to generated the related code for the new entity.
-* Change the code under `src/revocation-registry` to handle the emitted event and store it inside the entity. In this function we could also run a smart contract call request to request extra data from the contract if needed
+* Run `yarn codegen` to generate the related code for the new entity.
+* Change the code under `src/revocation-registry` to handle the emitted event and store it inside the entity. In this function we could also run a smart contract call request to get extra data from the contract if needed
 
   ```ts
   export function handleRevoked(event: Revoked): void {
     let entity = RevokedCredential.load(event.transaction.hash.toHex())
     if (!entity) {
       entity = new RevokedCredential(event.transaction.hash.toHex())
-      entity.count = BigInt.fromI32(0)
     }
-    entity.count = BigInt.fromI32(1).plus(entity.count)
     entity.issuerAddress = event.params.issuer
     entity.credentialHash = event.params.digest
     entity.blockNumber = event.block.number
@@ -73,7 +70,7 @@ Now we are ready create our sample subgraph using the follwoing steps:
 * In the console you will get the following
 
   ![image](./img/deployed.png)
-* Now we can query the index data open `https://api.thegraph.com/subgraphs/name/<github-name>/credential-revocation-graph` in browser and run the following query to get the hashes of all credentials that are revoked by a your Issuer-A from `./ssi-contracts`
+* Now we can query the index data open `https://api.thegraph.com/subgraphs/name/<github-name>/credential-revocation-graph` in browser and run the following query to get the hashes of all credentials that are revoked by Issuer-A in `./ssi-contracts`
 
   ![image](./img/query.png)
-The Results should contain only 1 revoked crednetial, unless you modified the scripts in `./ssi-contract` or used an already existing contracts for this query. You can also compair the results with the logged data of the executed script in `./ssi-contract`
+The Results should contain only 1 revoked crednetial, unless you modified the script in `./ssi-contract` or used an already existing contract for this query. You can also compair the results with the logged data of the executed script in `./ssi-contract`
