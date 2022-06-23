@@ -68,21 +68,21 @@ async function main() {
   // Credential from Issuer A
   const issuerACredentialJWT = await issueExampleJwtCredential(holderDid.did, didIssuerA);
   const hashOfIssuerACredential = ethers.utils.id(issuerACredentialJWT);
-  console.log('Hash of Credential:', hashOfIssuerACredential , 'Issued by isser A with Address: ' + issuerA.address);
+  console.log('Hash of Credential:', hashOfIssuerACredential , 'Issued by issuer A with Address: ' + issuerA.address);
   const revokeTx = await revocationRegistry.connect(issuerA).revoke(hashOfIssuerACredential);
   await revokeTx.wait();
 
   // Credential from Issuer B
   const issuerBCredentialJWT = await issueExampleJwtCredential(holderDid.did, didIssuerB);
   const hashOfIssuerBCredential = ethers.utils.id(issuerBCredentialJWT);
-  console.log('Hash of Credential:', hashOfIssuerBCredential , 'Issued by isser B with Address: ' + issuerB.address);
+  console.log('Hash of Credential:', hashOfIssuerBCredential , 'Issued by issuer B with Address: ' + issuerB.address);
   const revokeIssuerBCredential = await revocationRegistry.connect(issuerB).revoke(hashOfIssuerBCredential);
   await revokeIssuerBCredential.wait();
 
   // Credential from Issuer C
   const issuerCCredentialJWT =  await issueExampleJwtCredential(holderDid.did, didIssuerC);;
   const hashOfIssuerCCredential = ethers.utils.id(issuerCCredentialJWT);
-  console.log('Hash of Credential:', hashOfIssuerCCredential , 'Issued by isser C with Address: ' + issuerC.address);
+  console.log('Hash of Credential:', hashOfIssuerCCredential , 'Issued by issuer C with Address: ' + issuerC.address);
   const revokeIssuerCCredential = await revocationRegistry.connect(issuerC).revoke(hashOfIssuerCCredential);
   await revokeIssuerCCredential.wait();
 

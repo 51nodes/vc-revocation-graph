@@ -12,14 +12,16 @@ To revoke a verifiable credential the issuer must calculate the keccak hash of t
 * hardhat version 2.9.6
 * solidity version 0.8.4
 * 4 Accounts with test ether on `Goerli` testnet
+* Etherscan Account and API Key
+* Alchemy/Infura (or similar) Account for Testnet Access
 
 ### Setup and Run
 * Copy the file `.env.example` and rename it to `.env` and then replace the placeholders
-* Check if the requirement are verfilled
+* Check if the requirement are fulfilled
 * Check the configuration in `hardhat.config.js`
 * Install dependences with `npm install`
 * Compile contracts with `npx hardhat compile`
-* Deploy the contracts, issue and revoke 3 credentials with `npx hardhat run scripts/deployIssueAndRevoke.js` the script will:
+* Deploy the contracts, issue and revoke 3 credentials with `npx hardhat run scripts/deployIssueAndRevoke.ts --network goerli` the script will:
     * Deploy the `EthereumDIDRegistry` for DID management
     * Deploy the `RevocationRegistry` for the revocation of verifiable credentials
     * Issuer 3 credentials by 3 different issuers
