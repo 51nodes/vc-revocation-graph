@@ -11,7 +11,7 @@ A Sample Subgraph to index events which are emitted when a crednetial is revoked
 * The deployment scripts from `./ssi-contracts` executed successfully and the address of the revocation registry contract and the issuers are available
 
 ## Setup and Deployment
-The subgraph will be deployed on a hosted service because we are not using the Ethereum mainnet and also to keep it simple for the article. To deploy a subgraph on a hosted service you need first to sign in with github `https://thegraph.com/hosted-service/`. After that from the Dashboard a new Subgraph can be created by a click on `Add Subgraph` and adding a name e.g.`credential-revocation-graph` and subtitle.
+ To keep it simple for the article we will deploy the subgraph on a hosted service. To deploy a subgraph on a hosted service you need first to sign in with github `https://thegraph.com/hosted-service/`. After that from the Dashboard a new Subgraph can be created by a click on `Add Subgraph` and adding a name e.g.`credential-revocation-graph` and subtitle.
 
 Now we are ready create our sample subgraph using the follwoing steps:
 

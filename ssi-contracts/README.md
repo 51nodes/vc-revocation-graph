@@ -5,7 +5,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 This Repository deploys an Ethereum DID Registry contract for [ethr DID](https://github.com/uport-project/ethr-did), and a Revocation Registry Contract. There is also a script to deploy the contracts and execute example VC issuance and revocations.
 
 ## Revocation Process
-To revoke a verifiable credential the issuer must calculate the keccak hash of the JWT-Credential e.g. using [this](https://emn178.github.io/online-tools/keccak_256.html) and then send a transaction to the RevocationRegistry Contract. The Revocation Contract will then emit the `Revoked` event that includes the address of the supposed issuer (msg.sender) and the hash of the revoked credential. (Notice: Although the revocation contract is similar, this process does not follow the revocation process that is described in the [eip-1812](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1812.md#revocation))
+To revoke a verifiable credential the issuer must calculate the keccak hash of the JWT-Credential e.g. using [this](https://emn178.github.io/online-tools/keccak_256.html) and then send a transaction to the RevocationRegistry Contract. The Revocation Contract will then emit the `Revoked` event that includes the address of the supposed issuer (msg.sender) and the hash of the revoked credential.
 
 ### Requirements
 * node version 16.14.2
