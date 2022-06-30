@@ -4,7 +4,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 This repository contains two source code:
 
-* First the [./ssi-smart-contracts](ssi-smart-contrscts): includes smart contracts to register DIDs, issue and revoke credentials.
+* First the [./ssi-smart-contracts](ssi-smart-contrscts): includes required smart contracts to issue and revoke credentials.
 
-* Second the [./credential-revocation-subgraph](credential-revocation-subgraph): Description and files of a sample subgraph that index the on-Chain revokation using [the Graph protocol](https://thegraph.com/en/).
+* Second the [./credential-revocation-subgraph](credential-revocation-subgraph): Description and files of a sample subgraph that index the on-chain revokation using [the Graph protocol](https://thegraph.com/en/).
  

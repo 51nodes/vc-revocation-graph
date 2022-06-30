@@ -6,18 +6,15 @@ async function main() {
 
   const [holder, issuerA, issuerB, issuerC] = await ethers.getSigners();
  
-  // Deploy Registry Contract
-  const EthereumDIDRegistry = await ethers.getContractFactory("EthereumDIDRegistry");
-  const didRegistryInstance = await EthereumDIDRegistry.deploy();
-  await didRegistryInstance.deployed();
-  const addressOfDidRegistryContract = didRegistryInstance.address;
-  console.log("Ethereum DID Registry contract deployed to: ", addressOfDidRegistryContract);
+  // the DID Registry Contract
+  const addressOfDidRegistryContract = `0xdCa7EF03e98e0DC2B855bE647C39ABe984fcF21B`;
+  console.log("The used Ethereum DID Registry contract is at address: ", addressOfDidRegistryContract);
 
   // Deploy Revocation Contract
   const RevocationRegistry = await ethers.getContractFactory("RevocationRegistry");
   const revocationRegistry = await RevocationRegistry.deploy();
   await revocationRegistry.deployed();
-  console.log("Revocation Registry contract deployed to: ", revocationRegistry.address);
+  console.log("The Revocation Registry contract deployed to: %s . This address is required for the Subgraph", revocationRegistry.address);
 
   // Issue crednetials (offchain)
   const provider = new ethers.providers.JsonRpcProvider(process.env.GOERLI_URL);

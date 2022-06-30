@@ -22,8 +22,8 @@ To revoke a verifiable credential the issuer must calculate the keccak hash of t
 * Install dependences with `npm install`
 * Compile contracts with `npx hardhat compile`
 * Deploy the contracts, issue and revoke 3 credentials with `npx hardhat run scripts/deployIssueAndRevoke.ts --network goerli` the script will:
-    * Deploy the `EthereumDIDRegistry` for DID management
     * Deploy the `RevocationRegistry` for the revocation of verifiable credentials
     * Issuer 3 credentials by 3 different issuers
     * revoke the issued credentials by the issuers
+    * In Background a `EthereumDidRegistry` contract is required for the DID resolver. We are using the already deployed contract `0xdCa7EF03e98e0DC2B855bE647C39ABe984fcF21B` by the uport team to the Goerli network. A list of deployed EthereumDidRegistry on other networks can be found [here](https://github.com/uport-project/ethr-did-registry#contract-deployments)
 * In case that the contracts are not verified on `Goerli` etherscan then you musst verify them either manually or using this [plugin](https://hardhat.org/plugins/nomiclabs-hardhat-etherscan.html)
