@@ -1,20 +1,20 @@
-import { ethers } from "hardhat";
-import * as didVC from "did-jwt-vc";
-import { EthrDID } from "ethr-did";
+import { ethers } from 'hardhat';
+import * as didVC from 'did-jwt-vc';
+import { EthrDID } from 'ethr-did';
 
 async function main() {
 
   const [holder, issuerA, issuerB, issuerC] = await ethers.getSigners();
  
   // the DID Registry Contract
-  const addressOfDidRegistryContract = `0xdCa7EF03e98e0DC2B855bE647C39ABe984fcF21B`;
-  console.log("The used Ethereum DID Registry contract is at address: ", addressOfDidRegistryContract);
+  const addressOfDidRegistryContract = '0xdCa7EF03e98e0DC2B855bE647C39ABe984fcF21B';
+  console.log('The used Ethereum DID Registry contract is at address: ', addressOfDidRegistryContract);
 
   // Deploy Revocation Contract
-  const RevocationRegistry = await ethers.getContractFactory("RevocationRegistry");
+  const RevocationRegistry = await ethers.getContractFactory('RevocationRegistry');
   const revocationRegistry = await RevocationRegistry.deploy();
   await revocationRegistry.deployed();
-  console.log("The Revocation Registry contract deployed to: %s . This address is required for the Subgraph", revocationRegistry.address);
+  console.log('The Revocation Registry contract deployed to: %s . This address is required for the Subgraph', revocationRegistry.address);
 
   // Issue crednetials (offchain)
   const provider = new ethers.providers.JsonRpcProvider(process.env.GOERLI_URL);
@@ -24,7 +24,7 @@ async function main() {
     registry: addressOfDidRegistryContract,
     provider: provider,
     chainNameOrId: process.env.CHAIN_ID,
-    alg: "ES256K",
+    alg: 'ES256K',
     privateKey: process.env.PRIVATE_KEY,
     txSigner: holder,
   });
@@ -34,7 +34,7 @@ async function main() {
     registry: addressOfDidRegistryContract,
     provider: provider,
     chainNameOrId: process.env.CHAIN_ID,
-    alg: "ES256K",
+    alg: 'ES256K',
     privateKey: process.env.PRIVATE_KEY_ISSUER_A,
     txSigner: issuerA,
   }) as didVC.Issuer;
@@ -44,7 +44,7 @@ async function main() {
     registry: addressOfDidRegistryContract,
     provider: provider,
     chainNameOrId: process.env.CHAIN_ID,
-    alg: "ES256K",
+    alg: 'ES256K',
     privateKey: process.env.PRIVATE_KEY_ISSUER_B,
     txSigner: issuerB,
   }) as didVC.Issuer;
@@ -54,7 +54,7 @@ async function main() {
     registry: addressOfDidRegistryContract,
     provider: provider,
     chainNameOrId: process.env.CHAIN_ID,
-    alg: "ES256K",
+    alg: 'ES256K',
     privateKey: process.env.PRIVATE_KEY_ISSUER_C,
     txSigner: issuerC,
   }) as didVC.Issuer;
@@ -93,7 +93,7 @@ async function issueExampleJwtCredential(didOfHolder: string, issuer: didVC.Issu
           '@context': ['https://www.w3.org/2018/credentials/v1', 'https://www.w3.org/2018/credentials/examples/v1'],
           type: ['VerifiableCredential', 'BachelorDegree'],
           credentialSubject: {
-            degree: "Bachelor Of Arts"
+            degree: 'Bachelor Of Arts'
           }
       }
   }
