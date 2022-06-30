@@ -1,0 +1,7 @@
+type RevokedCredential @entity {
+  id: ID!
+  issuerAddress: Bytes! # address
+  credentialHash: Bytes! # bytes32
+  blockNumber: BigInt!
+  timestamp: BigInt!
+}
