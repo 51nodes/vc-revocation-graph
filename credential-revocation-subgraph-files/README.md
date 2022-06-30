@@ -1,23 +1,23 @@
 # Crednetial Revocation Subgraph
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied. See the License for the specific language governing permissions and limitations under the License.
 
-A Sample Subgraph to index events which are emitted when a crednetial is revoked by an Issuer. This Sample could be modified to implement complexe entities and also index serveral events of related contracts like the EthereumDIDRegistry contract.
+A sample Subgraph to index events which are emitted when a credential is revoked by an issuer. This sample could be modified to implement complex entities and also index several events of related contracts like the EthereumDIDRegistry contract.
 
-## Requirement 
+## Requirements
 
 * graph cli version 0.30.1
 * yarn version 1.22.17
 * The deployment scripts from `./ssi-contracts` executed successfully and the address of the revocation registry contract and the issuers are available
 
 ## Setup and Deployment
- To keep it simple for the article we will deploy the subgraph on a hosted service. To deploy a subgraph on a hosted service you need first to sign in with github `https://thegraph.com/hosted-service/`. After that from the Dashboard a new Subgraph can be created by a click on `Add Subgraph` and adding a name e.g.`credential-revocation-graph` and subtitle.
+ To keep it simple for the article we will deploy the subgraph on a hosted service. To deploy a subgraph on a hosted service you need first to sign in with github `https://thegraph.com/hosted-service/`. After that from the Dashboard a new Subgraph can be created with a click on `Add Subgraph` and adding a name e.g.`Credential Revocation Graph` and subtitle.
 
-Now we are ready create our sample subgraph using the follwoing steps:
+Now we are ready create our sample subgraph using the following steps:
 
 * Create a new folder and open it with VSC.
 * Open a new terminal and install the `graph cli` with `npm install -g @graphprotocol/graph-cli`
-* Initilize a sample subgraph for the revocation smart contract `graph init --product hosted-service <Github-Name>/credential-revocation-graph` and give 
+* Initialize a sample subgraph for the revocation smart contract `graph init --product hosted-service <Github-Name>/credential-revocation-graph` and give 
     * Protocol · ethereum
     * Subgraph name · <Github-Name>/credential-revocation-graph
     * Directory to create the subgraph in · credential-revocation-graph
@@ -45,7 +45,7 @@ Now we are ready create our sample subgraph using the follwoing steps:
   }
   ```
 * Run `yarn codegen` to generate the related code for the new entity.
-* Change the code under `src/revocation-registry` to handle the emitted event and store it inside the entity. In this function we could also run a smart contract call request to get extra data from the contract if needed
+* Change the code under `src/revocation-registry.ts` replacing the import for `ExampleEntity` to `RevokedCredential` and the `handleRevoked` function with the below content to handle the emitted event and store it inside the entity. In this function we could also run a smart contract call request to get extra data from the contract if needed
 
   ```ts
   export function handleRevoked(event: Revoked): void {
@@ -70,7 +70,19 @@ Now we are ready create our sample subgraph using the follwoing steps:
 * In the console you will get the following
 
   ![image](./img/deployed.png)
-* Now we can query the index data open `https://api.thegraph.com/subgraphs/name/<github-name>/credential-revocation-graph` in browser and run the following query to get the hashes of all credentials that are revoked by Issuer-A in `./ssi-contracts`
+* Now we can query the index data open `https://api.thegraph.com/subgraphs/name/<github-name>/credential-revocation-graph` in the browser and run a query like the following to get the hashes of all credentials that are revoked by Issuer-A in `./ssi-contracts`
 
   ![image](./img/query.png)
-The Results should contain only 1 revoked crednetial, unless you modified the script in `./ssi-contract` or used an already existing contract for this query. You can also compair the results with the logged data of the executed script in `./ssi-contract`
+
+  ```graphql
+  query ExampleQuery {
+    revokedCredentials(
+      where: {issuerAddress: "0x8675c25a37349e74536659AC066A4F36CB5d1A75"}
+    ) {
+      id
+      credentialHash
+      timestamp
+    }
+  }
+  ```
+The result should contain one revoked credential, unless you modified the script in `./ssi-contract` or used an already existing contract for this query. You can also compare the results with the logged data of the executed script in `./ssi-contract`.

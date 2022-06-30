@@ -1,10 +1,10 @@
-# Verifiable-Credentails-Revocation-And-Subgraph-Indexing
+# Verifiable Credentials Revocation and Subgraph Indexing
 
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or implied. See the License for the specific language governing permissions and limitations under the License.
 
-This repository contains two source code:
+This repository contains two projects:
 
-* First the [./ssi-smart-contracts](ssi-smart-contrscts): includes required smart contracts to issue and revoke credentials.
+* First the [./ssi-contracts](ssi-contracts): includes required scripts and smart contracts to issue and revoke credentials.
 
-* Second the [./credential-revocation-subgraph](credential-revocation-subgraph): Description and files of a sample subgraph that index the on-chain revokation using [the Graph protocol](https://thegraph.com/en/).
+* Second the [./credential-revocation-subgraph-files](credential-revocation-subgraph-files): description and files of a sample subgraph that indexes the on-chain revocation using [the Graph protocol](https://thegraph.com/en/).
  
